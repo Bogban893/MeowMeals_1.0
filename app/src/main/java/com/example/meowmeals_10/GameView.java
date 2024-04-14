@@ -77,7 +77,7 @@ public class GameView extends View {
         int eventAction = event.getAction();
         image_gun.setX((int) event.getX() - 150);
         image_gun.update(timerInterval);
-        Log.d("XXXXXXXXXXXXXXXXX", "GOFGHN");
+        Log.d("XXXXXXXXXXXXXXXXX", image_gun.getX()+"");
 //        fish_a = true;
 //        img_fish = new Sprite(image_gun.getX()+image_gun.getBx()/5, image_gun.getY(), 0, -1000, BitmapFactory.decodeResource(getResources(),R.drawable.img_fish));
         return false;

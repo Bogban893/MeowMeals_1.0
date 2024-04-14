@@ -14,7 +14,7 @@ public class Gun extends Sprite{
         super(x, y, velocityX, velocityY, bitmap);
         this.bitmap = bitmap;
         this.x = x;
-
+        this.rect = new Rect(x, y, x+bitmap.getWidth(), y+bitmap.getHeight());
     }
 //    public void draw_gun(Canvas canvas, int x, int y){
 //        rect = new Rect(x/2, (y - y/2), x/2+this.x, (y - y/2)+this.y);
