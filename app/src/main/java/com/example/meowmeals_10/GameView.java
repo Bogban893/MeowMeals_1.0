@@ -30,6 +30,9 @@ public class GameView extends View {
     private Bitmap image_gun_1 =  BitmapFactory.decodeResource(getResources(),R.drawable.img_gun);
     private Gun image_gun = new Gun(viewWidth/2,1000 - viewHeight/10, 0, 0,image_gun_1);
 
+    private Bitmap image_cat_1 = BitmapFactory.decodeResource(getResources(), R.drawable.img_cat);
+    private Cats image_cats = new Cats(0, -500, 0, 50, image_cat_1);
+
 
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) { // экран
@@ -50,7 +53,7 @@ public class GameView extends View {
         super(context);
         Timer t = new Timer();
         t.start();
-        if (Hp==0){t.onFinish();}
+//        if (Hp==0){t.onFinish();}
     }
 
     @Override
@@ -59,15 +62,23 @@ public class GameView extends View {
         image_gun.setY(viewHeight-viewHeight/6);
         super.onDraw(canvas);
         canvas.drawBitmap(image_fon,null,new Rect(0,0,viewWidth,viewHeight),null);
-        image_hp.draw_Hp(canvas, 3, viewWidth);
+        image_hp.draw_Hp(canvas, Hp, viewWidth);
         image_gun.draw(canvas);
+        image_cats.draw(canvas);
         p.setTextSize(70.0f); p.setColor(Color.WHITE);
         canvas.drawText(points+"", viewWidth - 100, 100, p); // счёт
         p.setTextSize(50.0f); canvas.drawText(pointsmax+"",viewWidth - 100, 180, p); // рекорд
     }
 
     protected void update(){
-        image_gun.update(timerInterval);
+        invalidate();
+        image_cats.update(timerInterval);
+        image_hp.update(timerInterval);
+        if (image_cats.intersect(image_gun)){
+            image_cats.eat(viewWidth);
+            image_cats.setY(-500);
+            Hp -= 1;
+        }
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -77,9 +88,7 @@ public class GameView extends View {
         int eventAction = event.getAction();
         image_gun.setX((int) event.getX() - 150);
         image_gun.update(timerInterval);
-        Log.d("XXXXXXXXXXXXXXXXX", image_gun.getX()+"");
-//        fish_a = true;
-//        img_fish = new Sprite(image_gun.getX()+image_gun.getBx()/5, image_gun.getY(), 0, -1000, BitmapFactory.decodeResource(getResources(),R.drawable.img_fish));
-        return false;
+        Log.d("XXXXXXXXXXXXXXXXX", Hp+"");
+        return true;
     }
 }
