@@ -16,13 +16,10 @@ public class Gun extends Sprite{
         this.x = x;
         this.rect = new Rect(x, y, x+bitmap.getWidth(), y+bitmap.getHeight());
     }
-//    public void draw_gun(Canvas canvas, int x, int y){
+    public void draw_gun(Canvas canvas, int x){
 //        rect = new Rect(x/2, (y - y/2), x/2+this.x, (y - y/2)+this.y);
 //        canvas.drawBitmap(bitmap, 2*x/11+x/5, y-y/6, paint);
-//    }
-    public void movement(int x) { // Зачем?
-         }
-    public void update (int ms) {
-        x =  (x + Vx * ms/1000);
+        canvas.drawBitmap(bitmap, x, this.y,null);
     }
+    public void movement(int x) {}// Зачем?
 }

@@ -62,7 +62,7 @@ public class Sprite {
         canvas.drawBitmap(bitmap, x, y,p);
     }
     public void update (int ms) {
-        x =  (x + velocityX * ms/1000);
-        y = y + velocityY * ms/1000;
+        x =  (x + velocityX * ms);
+        y = y + velocityY * ms;
     }
 }

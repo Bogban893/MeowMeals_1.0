@@ -19,7 +19,7 @@ public class GameView extends View {
     private Bitmap image_fon = BitmapFactory.decodeResource(getResources(), R.drawable.img_fon);
 
     int timerInterval = 30;
-    int gun_y;
+    int gun_x;
     int Hp = 3;
     public int points; // счёт
     public int pointsmax; // счёт макс
@@ -28,7 +28,7 @@ public class GameView extends View {
     private Stats image_hp = new Stats(500,500,0,0,image_hp_1);
 
     private Bitmap image_gun_1 =  BitmapFactory.decodeResource(getResources(),R.drawable.img_gun);
-    private Gun image_gun = new Gun(viewWidth/2,1000 - viewHeight/10, 0, 0,image_gun_1);
+    private Gun image_gun = new Gun(gun_x,1000 - viewHeight/10, 0, 0,image_gun_1);
 
 
     @Override
@@ -50,13 +50,12 @@ public class GameView extends View {
         super(context);
         Timer t = new Timer();
         t.start();
-        if (Hp==0){t.onFinish();}
     }
 
     @Override
     protected void onDraw(Canvas canvas) { // Рисование
         Paint p= new Paint();
-        image_gun.setY(viewHeight-viewHeight/6);
+        image_gun.setY(viewHeight-viewHeight/6); image_gun.setX(gun_x);
         super.onDraw(canvas);
         canvas.drawBitmap(image_fon,null,new Rect(0,0,viewWidth,viewHeight),null);
         image_hp.draw_Hp(canvas, 3, viewWidth);
@@ -67,7 +66,7 @@ public class GameView extends View {
     }
 
     protected void update(){
-        image_gun.update(timerInterval);
+        invalidate();
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -76,10 +75,8 @@ public class GameView extends View {
         super.onTouchEvent(event);
         int eventAction = event.getAction();
         image_gun.setX((int) event.getX() - 150);
-        image_gun.update(timerInterval);
-        Log.d("XXXXXXXXXXXXXXXXX", image_gun.getX()+"");
-//        fish_a = true;
-//        img_fish = new Sprite(image_gun.getX()+image_gun.getBx()/5, image_gun.getY(), 0, -1000, BitmapFactory.decodeResource(getResources(),R.drawable.img_fish));
-        return false;
+        gun_x = ((int) event.getX() - 150);
+        Log.d("XXXXXXXXXXXXXXXXX", image_gun.getX()+"  "+image_gun.getY());
+        return true;
     }
 }
