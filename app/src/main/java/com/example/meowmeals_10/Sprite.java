@@ -51,6 +51,11 @@ public class Sprite {
         return bitmap.getHeight();
     }
 
+    public void eat(int x){
+        this.y = -500;
+        this.x = (int) (Math.random()*(x))-200;
+    }
+
     public Rect getBoundingBoxRect () {
         return new Rect((int)x+padding, (int)y+padding, (int)(x + bitmap.getWidth() - 2 * padding), (int)(y + bitmap.getHeight() - 2 * padding));
     }
@@ -62,7 +67,7 @@ public class Sprite {
         canvas.drawBitmap(bitmap, x, y,p);
     }
     public void update (int ms) {
-        x =  (x + velocityX * ms);
-        y = y + velocityY * ms;
+        x =  (x + velocityX * ms/100);
+        y = y + velocityY * ms/100;
     }
 }
