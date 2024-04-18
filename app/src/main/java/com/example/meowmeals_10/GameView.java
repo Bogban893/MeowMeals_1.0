@@ -76,7 +76,8 @@ public class GameView extends View {
                 points += 10;
                 image_fish.remove(fish);
             }
-            fish.draw(canvas); fish.update(timerInterval);
+            fish.draw(canvas);
+            fish.update(timerInterval);
         }
 //        image_fish.draw(canvas);
         p.setTextSize(70.0f); p.setColor(Color.WHITE);
