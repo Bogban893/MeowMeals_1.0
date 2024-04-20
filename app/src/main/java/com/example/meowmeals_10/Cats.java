@@ -12,5 +12,7 @@ public class Cats extends Sprite {
         super(x, y, velocityX, velocityY, bitmap);
         this.y = y; this.x = x; this.bitmap = bitmap;
     }
+    public void spawn_cats(int nam){
 
+    }
 }

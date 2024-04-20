@@ -18,9 +18,9 @@ public class Stats extends Sprite{
 
     }
     public void draw_Hp(Canvas canvas, int Hp,int viewHeight){
-        int e = 0;
+        int e = viewHeight/20;
         for (int i = 0; i != Hp; i++) {
-            canvas.drawBitmap(bitmap, this.x+e, this.y, paint);
+            canvas.drawBitmap(bitmap,  (viewHeight)-e, this.y+30, paint);
 //            rect = new Rect(30+e,30, 30+this.x+e, this.y);
             e += viewHeight/20;
         }

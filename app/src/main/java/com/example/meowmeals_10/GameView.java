@@ -21,6 +21,7 @@ public class GameView extends View {
     private Bitmap image_fon = BitmapFactory.decodeResource(getResources(), R.drawable.img_fon);
 
     int timerInterval = 30;
+    int timerInterval_f = 30;
     int spawn_fish;
     int Hp = 3;
     public int points; // счёт
@@ -33,7 +34,13 @@ public class GameView extends View {
     private Gun image_gun = new Gun(viewWidth/2,1000 - viewHeight/10, 0, 0,image_gun_1);
 
     private Bitmap image_cat_1 = BitmapFactory.decodeResource(getResources(), R.drawable.img_cat);
-    private Cats image_cats = new Cats(0, -500, 0, 100, image_cat_1);
+    private Cats image_cats = new Cats(0, -500, 0, 150, image_cat_1);
+
+    private Restart rest = new Restart(viewWidth/2,viewHeight/2, 0, 0, BitmapFactory.decodeResource(getResources(),R.drawable.img_rest));
+    private Restart exit = new Restart(viewWidth/2,viewHeight/2, 0, 0, BitmapFactory.decodeResource(getResources(),R.drawable.img_exit));
+
+
+    private ArrayList<Cats> image_cats_m = new ArrayList<>();
 
     private ArrayList<Fish> image_fish = new ArrayList<>();
 
@@ -58,30 +65,29 @@ public class GameView extends View {
         super(context);
         Timer t = new Timer();
         t.start();
-//        if (Hp==0){t.onFinish();}
     }
 
     @Override
     protected void onDraw(Canvas canvas) { // Рисование
         Paint p= new Paint();
-        image_gun.setY(viewHeight-viewHeight/6);
+        image_gun.setY(viewHeight-viewHeight/8);
         super.onDraw(canvas);
         canvas.drawBitmap(image_fon,null,new Rect(0,0,viewWidth,viewHeight),null);
         image_hp.draw_Hp(canvas, Hp, viewWidth);
         image_gun.draw(canvas);
         image_cats.draw(canvas);
         for (Fish fish:image_fish){
-            if (image_cats.intersect(fish)){
-                image_cats.eat(viewWidth);
-                points += 10;
-                image_fish.remove(fish);
-            }
-            fish.draw(canvas);fish.update(timerInterval);
-        }
-//        image_fish.draw(canvas);
+            if (image_cats.intersect(fish)){image_cats.eat(viewWidth);points += 1;image_fish.remove(fish);break;}
+            fish.draw(canvas);fish.update(timerInterval);}
         p.setTextSize(70.0f); p.setColor(Color.WHITE);
-        canvas.drawText(points+"", viewWidth - 100, 100, p); // счёт
-        p.setTextSize(50.0f); canvas.drawText(pointsmax+"",viewWidth - 100, 180, p); // рекорд
+        canvas.drawText(points+"", 50, 100, p); // счёт
+        p.setTextSize(50.0f); canvas.drawText(pointsmax+"",50, 180, p); // рекорд
+        if (Hp == 0) {
+            timerInterval=0;
+            rest.draw_rest(canvas, viewWidth, viewHeight, 6);
+            exit.draw_exit(canvas, viewWidth, viewHeight, 6);
+
+        }
     }
 
     protected void update(){
@@ -103,13 +109,14 @@ public class GameView extends View {
     public boolean onTouchEvent(MotionEvent event) {
         super.onTouchEvent(event);
         int eventAction = event.getAction();
-        image_gun.setX((int) event.getX() - 150);
-        if (spawn_fish==0) {
-            spawn_fish=5;
-            image_fish.add(new Fish(image_gun.getX(), 1860, 0, -75, BitmapFactory.decodeResource(getResources(),R.drawable.img_fish)));
-        } else spawn_fish--;
-        image_gun.update(timerInterval);
-        Log.d("XXXXXXXXXXXXXXXXX", image_cats.getY()+"");
+        if (Hp > 0) {image_gun.setX((int) event.getX() - 150);
+            if (spawn_fish == 0) {spawn_fish = 32;image_fish.add(new Fish(image_gun.getX(), 1860, 0, -120, BitmapFactory.decodeResource(getResources(), R.drawable.img_fish)));
+            } else spawn_fish--;}
+        if (event.getX()>viewWidth/5 && event.getX()<viewWidth/5*4 && event.getY()>viewHeight/6*2 && event.getY()<viewHeight/6*3-(viewHeight/40)) {Hp = 3; points = 0; timerInterval = 30;}
+        if (event.getX()>viewWidth/5 && event.getX()<viewWidth/5*4 && event.getY()>viewHeight/6*3 && event.getY()<viewHeight/6*4-(viewHeight/40)) {points = 0;}
+
+
+        Log.d("XXXXXXXXXXXXXXXXX", Hp+"");
         return true;
     }
 }
