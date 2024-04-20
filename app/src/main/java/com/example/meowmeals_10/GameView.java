@@ -113,7 +113,7 @@ public class GameView extends View {
             if (spawn_fish == 0) {spawn_fish = 32;image_fish.add(new Fish(image_gun.getX(), 1860, 0, -120, BitmapFactory.decodeResource(getResources(), R.drawable.img_fish)));
             } else spawn_fish--;}
         if (event.getX()>viewWidth/5 && event.getX()<viewWidth/5*4 && event.getY()>viewHeight/6*2 && event.getY()<viewHeight/6*3-(viewHeight/40)) {Hp = 3; points = 0; timerInterval = 30;}
-        if (event.getX()>viewWidth/5 && event.getX()<viewWidth/5*4 && event.getY()>viewHeight/6*3 && event.getY()<viewHeight/6*4-(viewHeight/40)) {points = 0;}
+        if (event.getX()>viewWidth/5 && event.getX()<viewWidth/5*4 && event.getY()>viewHeight/6*3 && event.getY()<viewHeight/6*4-(viewHeight/40)) {points = 1;}
 
 
         Log.d("XXXXXXXXXXXXXXXXX", Hp+"");
