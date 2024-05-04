@@ -3,6 +3,7 @@ package com.example.meowmeals_10;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
 
 public class MainActivity1 extends AppCompatActivity {
 
@@ -12,6 +13,7 @@ public class MainActivity1 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 //        setContentView(R.layout.activity_main1);
         setContentView(new GameView(this));
+
 
     }
 }

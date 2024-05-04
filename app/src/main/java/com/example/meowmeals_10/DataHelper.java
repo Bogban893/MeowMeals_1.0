@@ -14,11 +14,10 @@ public class DataHelper {
 
     private static final String COLUMN_ID = "_id";
     private static final String COLUMN_RECORD = "record";
-    private static final String COLUMN_COINS = "coins";
 
     private static final int NUM_COLUMN_ID = 0;
     private static final int NUM_COLUMN_RECORD = 1;
-    private static final int NUM_COLUMN_COINS = 2;
+
 
     private SQLiteDatabase db;
 
@@ -37,18 +36,6 @@ public class DataHelper {
         cv.put(COLUMN_RECORD, record);
         return db.update(TABLE_NAME, cv, null,null);
     }
-    public int updateCoins(int coins){
-        ContentValues cv=new ContentValues();
-        cv.put(COLUMN_COINS, coins);
-        return db.update(TABLE_NAME, cv, null,null);
-
-    }
-    public int selectCoins() {
-        Cursor cursor = db.query(TABLE_NAME, null, null, null, null, null, null);
-        cursor.moveToFirst();
-        return cursor.getInt(NUM_COLUMN_COINS);
-    }
-
     public int select() {
         Cursor cursor = db.query(TABLE_NAME, null, null, null, null, null, null);
         cursor.moveToFirst();
@@ -65,11 +52,9 @@ public class DataHelper {
         public void onCreate(SQLiteDatabase db) {
             String query = "CREATE TABLE " + TABLE_NAME + " (" +
                     COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                    COLUMN_RECORD + " INTEGER,"+ COLUMN_COINS+" INTEGER); ";
+                    COLUMN_RECORD + " INTEGER); ";
             db.execSQL(query);
             query = "INSERT INTO " + TABLE_NAME + " (" + COLUMN_RECORD + ") VALUES (0)";
-            db.execSQL(query);
-            query = "INSERT INTO " + TABLE_NAME + " (" + COLUMN_COINS + ") VALUES (0)";
             db.execSQL(query);
         }
 
