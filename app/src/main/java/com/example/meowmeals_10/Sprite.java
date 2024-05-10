@@ -53,11 +53,12 @@ public class Sprite {
 
     public void eat(int x){
         this.y = -500;
-        int xi = (int) (Math.random()*(x))-100;
-         if (100<xi | xi>x-100) {while (100<xi | xi>x-100) {
-            xi = (int) (Math.random()*(x))-100;
-        }
-         } else this.x = xi;
+        int xi = (int) (Math.random()*(x-100))-100;
+        this.x = xi;
+//         if (100<xi | xi>x-100) {while (100<xi | xi>x-100) {
+//            xi = (int) (Math.random()*(x))-100;
+//        }
+//         } else this.x = xi;
     }
 
     public Rect getBoundingBoxRect () {

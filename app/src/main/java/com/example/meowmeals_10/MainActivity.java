@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
-    Button button;
+    Button button_s,button_q;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -16,13 +16,20 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         getSupportActionBar().hide();
 
-        button = findViewById(R.id.button);
+        button_s = findViewById(R.id.button_s);
+        button_q = findViewById(R.id.button_q);
 
-        button.setOnClickListener(new View.OnClickListener() {
+        button_s.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(MainActivity.this, MainActivity1.class);
                 startActivity(i);
+            }
+        });
+        button_q.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finishAffinity();
             }
         });
     }
